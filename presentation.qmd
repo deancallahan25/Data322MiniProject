@@ -1,12 +1,39 @@
 ---
 title: Study Group Recommender with Machine Learning
-subtitle: "Developed: by class of\\nDATA322 Presented: by Team Machines"
+subtitle: "Developed: by class of DATA322 Presented: by Team Machines"
 
 jupyter: python3
 format: pptx
 ---
-
+# Problem Overview
 ```{python}
 #| echo: false
 print("Hello World")
 ```
+
+# Data Collection - Fill Out This Form!
+
+# Tidy Data Collected 
+
+# Distance Definition
+
+# How distance between students work?
+
+# Clustering: Linkage Choice
+
+# Clustering: Code and Dendrogram
+
+# Group Recommendations and Student Assignment
+
+# Evaluation Form (from Presenting Team)
+- Url: https://forms.gle/mBq7GdZiLTy8Ydhf9
+
+# Credits
+- Presented by Team Machines:
+    - Anthony Wolfe - Job Title
+    - Dean Callahan - Job Title
+    - Jonathan Juarez - Job Title
+    - Devon Walker - Job Title
+
+- Data and Question Design By: Team SARA
+- Distance and Clustering By: Team Errors

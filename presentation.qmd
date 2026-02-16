@@ -8,6 +8,10 @@ format: pptx
 # Problem Overview
 ```{python}
 #| echo: false
+
+import qrcode
+import matplotlib.pyplot as plt
+
 print("Hello World")
 ```
 
@@ -26,7 +30,21 @@ print("Hello World")
 # Group Recommendations and Student Assignment
 
 # Evaluation Form (from Presenting Team)
-- Url: https://forms.gle/mBq7GdZiLTy8Ydhf9
+- Link: [https://forms.gle/mBq7GdZiLTy8Ydhf9](https://forms.gle/mBq7GdZiLTy8Ydhf9)
+```{python}
+url="https://forms.gle/mBq7GdZiLTy8Ydhf9"
+# Create QR code
+qr=qrcode.QRCode(version=None, box_size=10, border=4)
+qr.add_data(url)
+qr.make(fit=True)
+img = qrcode.make(url).convert("RGB") 
+#img=qr.make_image(fill_color="black", back_color="white")
+# Display QR code
+plt.imshow(img)
+plt.axis("off")
+plt.show()
+```
+
 
 # Credits
 - Presented by Team Machines:

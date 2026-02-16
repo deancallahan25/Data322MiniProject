@@ -1,5 +1,7 @@
 ---
-title: Data 322 Study Group Recommender
+title: Study Group Recommender with Machine Learning
+subtitle: "Developed: by class of\\nDATA322 Presented: by Team Machines"
+
 jupyter: python3
 format: pptx
 ---

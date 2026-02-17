@@ -36,7 +36,8 @@ plt.show()
 
 # Tidy Data Collected 
 
-# Distance Definition
+# Gower’s for Distances Between Clusters
+![Gower's Method](gowers_method.png)
 
 # How distance between students work?
 

@@ -12,6 +12,7 @@ format: pptx
 import qrcode
 import matplotlib.pyplot as plt
 ```
+
 # Problem Overview
 Many students struggle with understanding course material, staying accountable, and performing well on exams. While study groups can feel intimidating, research shows they significantly improve comprehension, retention, and exam scores. Now the big question is: How do we create effective study groups that maximize learning, accountability, and confidence while minimizing the fear of participation?
 
@@ -66,10 +67,10 @@ plt.show()
 
 # Credits
 - Presented by Team Machines:
-    - Anthony Wolfe - Job Title
-    - Dean Callahan - Job Title
-    - Jonathan Juarez - Job Title
-    - Devon Walker - Job Title
+    - Anthony Wolfe - Project Coordinator
+    - Dean Callahan - Technical Lead
+    - Jonathan Juarez - Data Scientist
+    - Devon Walker - Data Scientist
 
 - Data and Question Design By: Team SARA
 - Distance and Clustering By: Team Errors

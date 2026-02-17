@@ -35,16 +35,18 @@ plt.axis("off")
 plt.show()
 ```
 
-# Tidy Data Collected 
-
 # Gower’s for Distances Between Clusters
 ![Gower's Method](gowers_method.png)
 
-# How distance between students work?
+# How does our distance work between students?
 
-# Clustering: Linkage Choice
+# Complete Linkage for Merging Clusters
 
-# Clustering: Code and Dendrogram
+# Tidy Data Collected 
+
+# Let's Look at the Code
+
+# Our Results Visualized as a Dendrogram 
 
 # Group Recommendations and Student Assignment
 

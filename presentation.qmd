@@ -74,6 +74,17 @@ Students with **(smaller distances)** are grouped together in the recommender sy
 
 
 # Complete Linkage for Merging Clusters
+:::: {.columns}
+
+::: {.column width="40%"}
+Complete linkage describes the metric we use to decide the merging of clusters. In particular, we merge the minimum distance created by the farthest points within two clusters, which is found by comparing the distances from every pair of points between the clusters.
+:::
+
+::: {.column width="60%"}
+![Visualization of Complete Linkage](complete_linkage.png)
+:::
+
+::::
 
 # Tidy Data Collected 
 
@@ -100,6 +111,8 @@ plt.axis("off")
 plt.show()
 ```
 
+# Feedback from the Evaluation Form
+Feedback from the evaluation form will be anonymous, however the results will help us all improve future iterations of our model generalized to all students. ** Ask Rosanna if she wants to share the results to them later on **
 
 # Credits
 - Presented by Team Machines:

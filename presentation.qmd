@@ -4,8 +4,21 @@ subtitle: "Developed: by class of DATA322 Presented: by Team Machines"
 execute:
    error: true
 jupyter: python3
-format: pptx
+format: 
+  revealjs:
+    theme: default
 ---
+
+<style>
+h1, h2, h3, h4, h5, h6 {
+  font-size: 25px !important;
+}
+
+p, li, span {
+  font-size: 14px !important;
+}
+</style>
+
 ```{python}
 #| echo: false
 
@@ -39,6 +52,26 @@ plt.show()
 ![Gower's Method](gowers_method.png)
 
 # How does our distance work between students?
+We calculate similarity between students based on:
+
+**(Numeric variables)** (i.e., study hours per week, quiz/exam scores)
+
+* Measured by normalized numerical difference.
+
+**(Categorical variables)** (i.e, major, preferred study style, availability, learning preference).
+
+* Measured by 0 if they match, 1 if they differ.
+Each variable contributes equally or weighted if needed to an overall similarity score.
+
+**(Final Distance Score)**
+Distance ranges from 0 to 1.
+
+* 0 = Very similar students
+
+* 1 = Very different students
+
+Students with **(smaller distances)** are grouped together in the recommender system to create balanced, compatible study groups.
+
 
 # Complete Linkage for Merging Clusters
 

@@ -32,8 +32,11 @@ Many students struggle with understanding course material, staying accountable, 
 
 
 # Data Collection - Fill Out This Form!
+:::: {.columns}
+::: {.column width="40%"}
 First, please fill out our short survey, which we’ll use to recommend everyone’s study groups! While you are all filling that out, we’ll begin talking about the methods used in our hierarchical clustering algorithm. You are all your own cluster to start, but will begin merging together one by one based on similarity and differences in responses!
-
+:::
+::: {.column width="60%"}
 ```{python}
 url="https://docs.google.com/forms/d/e/1FAIpQLSdO8crqtnLQZqj-13miPjY7mofl3iHILaMsBXpKWxbkXv0R2w/viewform"
 # Create QR code
@@ -48,6 +51,8 @@ plt.imshow(img)
 plt.axis("off")
 plt.show()
 ```
+::: 
+::::
 
 # Gower’s for Distances Between Clusters
 ![Gower's Method](gowers_method.png)
@@ -96,7 +101,11 @@ Complete linkage describes the metric we use to decide the merging of clusters. 
 # Group Recommendations and Student Assignment
 
 # Evaluation Form (from Presenting Team)
-- Link: [https://forms.gle/mBq7GdZiLTy8Ydhf9](https://forms.gle/mBq7GdZiLTy8Ydhf9)
+:::: {.columns}
+::: {.column width="40%"}
+Feedback from the evaluation form will be anonymous, however the results will help us all improve future iterations of our model generalized to all students. ** Ask Rosanna if she wants to share the results to them later on **
+:::
+::: {.column width="60%"}
 ```{python}
 url="https://forms.gle/mBq7GdZiLTy8Ydhf9"
 # Create QR code
@@ -112,8 +121,8 @@ plt.axis("off")
 plt.show()
 ```
 
-# Feedback from the Evaluation Form
-Feedback from the evaluation form will be anonymous, however the results will help us all improve future iterations of our model generalized to all students. ** Ask Rosanna if she wants to share the results to them later on **
+:::
+::::
 
 # Credits
 - Presented by Team Machines:

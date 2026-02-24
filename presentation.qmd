@@ -93,7 +93,8 @@ Complete linkage describes the metric we use to decide the merging of clusters. 
 ::::
 
 # Tidy Data Collected 
-<!--[Open live dataset](link)--> 
+[Open live dataset](https://docs.google.com/spreadsheets/d/1IxP1wH9CJMFxqZI-ZSt8q-EcQtlF5mnP-btR4SKDWV4/edit?usp=sharing)
+
 # Let's Look at the Code
 
 # Our Results Visualized as a Dendrogram 
@@ -133,3 +134,59 @@ plt.show()
 
 - Data and Question Design By: Team SARA
 - Distance and Clustering By: Team Errors
+
+
+
+
+
+
+
+<!-- testing notebook rendering -->
+```{python}
+#!pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+from google.colab import auth
+auth.authenticate_user()
+import gspread
+from google.auth import default
+creds, _ = default() # get_application_default() is deprecated
+
+gc = gspread.authorize(creds) # gspread now expects google-auth credentials
+# Taken from last year's notebook
+
+#!pip install ISLP
+
+import seaborn as sns
+import numpy as np
+import sklearn
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import re
+
+from sklearn.cluster import \
+     (KMeans,
+      AgglomerativeClustering)
+from scipy.spatial.distance import pdist, squareform
+from ISLP.cluster import compute_linkage
+from scipy.cluster.hierarchy import \
+     (dendrogram,
+      cut_tree,
+      linkage)
+#pip install gower
+import gower
+```
+
+```{python}
+# import data from google survey
+
+# real one
+wb = gc.open_by_url('https://docs.google.com/spreadsheets/d/1IxP1wH9CJMFxqZI-ZSt8q-EcQtlF5mnP-btR4SKDWV4/edit?gid=804837988#gid=804837988')
+
+# simulated
+# wb = gc.open_by_url('https://docs.google.com/spreadsheets/d/1fiIOkwfttAIv5P0ca6IcVdAk5IAG-WrThyriQiXPRIQ/edit?gid=1707814890#gid=1707814890')
+
+sheet = wb.sheet1
+
+print("Hello")
+```

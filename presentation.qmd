@@ -93,7 +93,7 @@ Complete linkage describes the metric we use to decide the merging of clusters. 
 ::::
 
 # Tidy Data Collected 
-
+<!--[Open live dataset](link)--> 
 # Let's Look at the Code
 
 # Our Results Visualized as a Dendrogram 

@@ -6,8 +6,8 @@
 <script src="presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <title>Study Group Recommender with Machine Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -144,19 +144,6 @@ p, li, span {
   font-size: 14px !important;
 }
 </style>
-<div id="8292e7f4" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[1]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">qrcode</span>
-<span class="ansi-green-fg">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">matplotlib</span><span class="ansi-blue-fg ansi-bold">.</span><span class="ansi-blue-fg ansi-bold">pyplot</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">plt</span>
-
-<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'qrcode'</pre>
-</div>
-</div>
-</div>
 </section>
 <section id="problem-overview" class="title-slide slide level1 center">
 <h1>Problem Overview</h1>
@@ -166,19 +153,12 @@ p, li, span {
 <section id="data-collection---fill-out-this-form" class="title-slide slide level1 center">
 <h1>Data Collection - Fill Out This Form!</h1>
 <p>First, please fill out our short survey, which we’ll use to recommend everyone’s study groups! While you are all filling that out, we’ll begin talking about the methods used in our hierarchical clustering algorithm. You are all your own cluster to start, but will begin merging together one by one based on similarity and differences in responses!</p>
-<div id="7cdb084d" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 4</span>
-<span class="ansi-green-fg">      1</span> url=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">https://docs.google.com/forms/d/e/1FAIpQLSdO8crqtnLQZqj-13miPjY7mofl3iHILaMsBXpKWxbkXv0R2w/viewform</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">      2</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create QR code</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">4</span> qr=<span class="ansi-yellow-bg">qrcode</span>.QRCode(version=<span style="font-weight:bold;color:rgb(0,135,0)">None</span>, box_size=<span class="ansi-green-fg">8</span>, border=<span class="ansi-green-fg">4</span>)
-<span class="ansi-green-fg">      5</span> qr.add_data(url)
-<span class="ansi-green-fg">      6</span> qr.make(fit=<span style="font-weight:bold;color:rgb(0,135,0)">True</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'qrcode' is not defined</pre>
+<div id="1f9e71c6" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentation_files/figure-revealjs/cell-3-output-1.png" width="389" height="389"></p>
+</figure>
 </div>
 </div>
 </div>
@@ -210,7 +190,17 @@ p, li, span {
 
 <section id="complete-linkage-for-merging-clusters" class="title-slide slide level1 center">
 <h1>Complete Linkage for Merging Clusters</h1>
-
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Complete linkage describes the metric we use to decide the merging of clusters. In particular, we merge the minimum distance created by the farthest points within two clusters, which is found by comparing the distances from every pair of points between the clusters.</p>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="complete_linkage.png"></p>
+<figcaption>Visualization of Complete Linkage</figcaption>
+</figure>
+</div>
+</div></div>
 </section>
 
 <section id="tidy-data-collected" class="title-slide slide level1 center">
@@ -238,22 +228,20 @@ p, li, span {
 <ul>
 <li>Link: <a href="https://forms.gle/mBq7GdZiLTy8Ydhf9">https://forms.gle/mBq7GdZiLTy8Ydhf9</a></li>
 </ul>
-<div id="a71b5c18" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 4</span>
-<span class="ansi-green-fg">      1</span> url=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">https://forms.gle/mBq7GdZiLTy8Ydhf9</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">      2</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create QR code</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">4</span> qr=<span class="ansi-yellow-bg">qrcode</span>.QRCode(version=<span style="font-weight:bold;color:rgb(0,135,0)">None</span>, box_size=<span class="ansi-green-fg">10</span>, border=<span class="ansi-green-fg">4</span>)
-<span class="ansi-green-fg">      5</span> qr.add_data(url)
-<span class="ansi-green-fg">      6</span> qr.make(fit=<span style="font-weight:bold;color:rgb(0,135,0)">True</span>)
+<div id="4f69dd11" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentation_files/figure-revealjs/cell-4-output-1.png" width="389" height="389"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 
-<span class="ansi-red-fg">NameError</span>: name 'qrcode' is not defined</pre>
-</div>
-</div>
-</div>
+<section id="feedback-from-the-evaluation-form" class="title-slide slide level1 center">
+<h1>Feedback from the Evaluation Form</h1>
+<p>Feedback from the evaluation form will be anonymous, however the results will help us all improve future iterations of our model generalized to all students. ** Ask Rosanna if she wants to share the results to them later on **</p>
 </section>
 
 <section id="credits" class="title-slide slide level1 center">

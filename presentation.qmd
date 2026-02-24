@@ -4,9 +4,10 @@ subtitle: "Developed: by class of DATA322 Presented: by Team Machines"
 execute:
    error: true
 jupyter: python3
-format: 
-  revealjs:
-    theme: default
+format: pptx
+
+#  revealjs:
+#    theme: default
 ---
 
 <style>

@@ -64,14 +64,15 @@ plt.show()
 # How does our distance work between students?
 We calculate similarity between students based on:
 
-**(Numeric variables)** (i.e., study hours per week, quiz/exam scores)
+- **(Numeric variables)** (i.e., study hours per week, quiz/exam scores)
 
-* Measured by normalized numerical difference.
+  -- Measured by normalized numerical difference.
 
-**(Categorical variables)** (i.e, major, preferred study style, availability, learning preference).
+- **(Categorical variables)** (i.e, major, preferred study style, availability, learning preference).
 
-* Measured by 0 if they match, 1 if they differ.
-Each variable contributes equally or weighted if needed to an overall similarity score.
+  -- Measured by 0 if they match, 1 if they differ. Each variable contributes equally or weighted if needed to an overall similarity score.
+
+# Distance continued...
 
 **(Final Distance Score)**
 Distance ranges from 0 to 1.

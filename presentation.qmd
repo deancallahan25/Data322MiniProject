@@ -2,7 +2,9 @@
 title: Study Group Recommender with Machine Learning
 subtitle: "Developed: by class of DATA322 Presented: by Team Machines"
 execute:
-   error: true
+  echo: false
+  error: false
+  output: false
 jupyter: python3
 format: pptx
 
@@ -38,6 +40,8 @@ First, please fill out our short survey, which we’ll use to recommend everyone
 :::
 ::: {.column width="60%"}
 ```{python}
+#| output: true
+
 url="https://docs.google.com/forms/d/e/1FAIpQLSdO8crqtnLQZqj-13miPjY7mofl3iHILaMsBXpKWxbkXv0R2w/viewform"
 # Create QR code
 
@@ -95,11 +99,161 @@ Complete linkage describes the metric we use to decide the merging of clusters. 
 # Tidy Data Collected 
 [Open live dataset](https://docs.google.com/spreadsheets/d/1IxP1wH9CJMFxqZI-ZSt8q-EcQtlF5mnP-btR4SKDWV4/edit?usp=sharing)
 
-# Let's Look at the Code
 
+```{python}
+import seaborn as sns
+import numpy as np
+import sklearn
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import re
+from sklearn.cluster import \
+     (KMeans,
+      AgglomerativeClustering)
+from scipy.spatial.distance import pdist, squareform
+from ISLP.cluster import compute_linkage
+from scipy.cluster.hierarchy import \
+     (dendrogram,
+      cut_tree,
+      linkage)
+import gower
+```
+
+```{python}
+
+# import data from google survey
+url= "https://docs.google.com/spreadsheets/d/1IxP1wH9CJMFxqZI-ZSt8q-EcQtlF5mnP-btR4SKDWV4/export?format=csv&gid=804837988"
+
+#test url will need permision to access to test visualizations 
+
+#url = "https://docs.google.com/spreadsheets/d/1fiIOkwfttAIv5P0ca6IcVdAk5IAG-WrThyriQiXPRIQ/export?format=csv&gid=1707814890"
+df_unclean = pd.read_csv(url)
+df_unclean = df_unclean.iloc[:, 1:]
+questions = ["How fast do you prefer to move through material?",
+             "How much help do you expect from a study group?",
+             "What days are you available to meet for your study group?",
+             "What is your ideal study session length?",
+             "What is your preferred meeting format?",
+             "I learn best when someone...",
+             "Rate your comfort in asking questions on a scale of 1-5.",
+             "Choose what study group you prefer.",
+             "What is your preference when prepping for exams?"]
+column_names = ["speed", "need", "avail_day", "session_len", "pref_format", "learn", "comfort", "group_type", "exam_prep"]
+df = df_unclean.loc[:,questions]
+df.columns = column_names
+df = df.reset_index(drop=True)
+df.index += 1
+df.head()
+```
+
+```{python}
+df.columns
+```
+```{python}
+days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+for day in days:
+  avail = [(day in example) for example in df['avail_day'].values]
+  df[day] = (avail)
+
+df = df.drop(columns='avail_day')
+df.head()
+```
+
+```{python}
+df.dtypes
+```
+
+```{python}
+
+df.comfort = df.comfort.astype(int)
+df.speed = df.speed.astype(int)
+df.need = df.need.astype(int)
+df.dtypes
+``` 
+
+```{python}
+# define feature weights
+weights = np.array([1, 1.6, 1, 1.1, 1, 0.7, 1.4, 1.2, (2/7), (2/7), (2/7), (2/7), (2/7), (2/7), (2/7)])
+```
+
+```{python}
+
+categoricals = np.array([False, False, True, True, True, False, True, True, True, True, True, True, True, True, True])
+# create distance matrix
+dist = gower.gower_matrix(df, weight=weights, cat_features=categoricals).round(2)
+
+dist = pd.DataFrame(dist,
+                       index=df.index,
+                       columns=df.index).round(2)
+
+dist
+```
+
+```{python}
+# cut dendrogram
+
+"""
+  Following 'clusters' sets the number of clusters. We advise n_clusters = 18 to start.
+
+  Further down will be a cell that returns the number of students in each cluster.
+  Due to how cut_tree works we can not guarrentee clusters within certain size
+  limitations. Because of this you may need to alter n_clusters to suit your data.
+  Specifically, if cluster sizes exceed 5 you may need to increase n_clusters by 1.
+
+  Clusters with only 1-2 student should be advised to join another group to form
+  clusters of appropriate size (3-5 students ideally).
+"""
+link_complete = linkage(dist, 'complete')
+clusters = cut_tree(link_complete, n_clusters=18).flatten()
+clusters
+```
 # Our Results Visualized as a Dendrogram 
+```{python}
+#| output: true
+
+# and this one we visually show the cluster diffs
+fig, ax = plt.subplots(figsize=(10,8))
+dendrogram(link_complete, labels=df.index, ax=ax, orientation= 'left')
+ax.set_title('Complete linkage (Student Study Groups)')
+plt.show()
+```
+
+# Study Group Sizes
+```{python}
+#| output: true
+
+# table
+
+"""
+Here we see the number of students in each cluster.
+
+Adjust n_clusters above as needed to create clusters that do not exceed 5 students.
+
+Students with only 1-2 students should be advised to join another group to form
+clusters of appropriate size (ideally 3-5 students).
+"""
+
+df['clusters'] = clusters
+df.groupby('clusters').size()
+```
 
 # Group Recommendations and Student Assignment
+```{python}
+#| output: true
+# This table shows each students cluster
+
+df_groups = df_unclean.copy()
+df_groups['group'] = clusters
+usernames = df_groups['Email Address'].values
+usernames = re.findall(r'(\w+)@', str(usernames))
+df_groups['username'] = usernames
+df_groups = df_groups.loc[:,['username', 'group']]
+df_groups.groupby('group').agg(list)
+
+```
+
 
 # Evaluation Form (from Presenting Team)
 :::: {.columns}
@@ -108,6 +262,8 @@ Feedback from the evaluation form will be anonymous, however the results will he
 :::
 ::: {.column width="60%"}
 ```{python}
+#| output: true
+
 url="https://forms.gle/mBq7GdZiLTy8Ydhf9"
 # Create QR code
 
@@ -134,59 +290,3 @@ plt.show()
 
 - Data and Question Design By: Team SARA
 - Distance and Clustering By: Team Errors
-
-
-
-
-
-
-
-<!-- testing notebook rendering -->
-```{python}
-#!pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
-from google.colab import auth
-auth.authenticate_user()
-import gspread
-from google.auth import default
-creds, _ = default() # get_application_default() is deprecated
-
-gc = gspread.authorize(creds) # gspread now expects google-auth credentials
-# Taken from last year's notebook
-
-#!pip install ISLP
-
-import seaborn as sns
-import numpy as np
-import sklearn
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
-import re
-
-from sklearn.cluster import \
-     (KMeans,
-      AgglomerativeClustering)
-from scipy.spatial.distance import pdist, squareform
-from ISLP.cluster import compute_linkage
-from scipy.cluster.hierarchy import \
-     (dendrogram,
-      cut_tree,
-      linkage)
-#pip install gower
-import gower
-```
-
-```{python}
-# import data from google survey
-
-# real one
-wb = gc.open_by_url('https://docs.google.com/spreadsheets/d/1IxP1wH9CJMFxqZI-ZSt8q-EcQtlF5mnP-btR4SKDWV4/edit?gid=804837988#gid=804837988')
-
-# simulated
-# wb = gc.open_by_url('https://docs.google.com/spreadsheets/d/1fiIOkwfttAIv5P0ca6IcVdAk5IAG-WrThyriQiXPRIQ/edit?gid=1707814890#gid=1707814890')
-
-sheet = wb.sheet1
-
-print("Hello")
-```

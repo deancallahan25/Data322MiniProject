@@ -127,9 +127,8 @@ import gower
 # import data from google survey
 url= "https://docs.google.com/spreadsheets/d/1IxP1wH9CJMFxqZI-ZSt8q-EcQtlF5mnP-btR4SKDWV4/export?format=csv&gid=804837988"
 
-#test url will need permision to access to test visualizations 
 
-#url = "https://docs.google.com/spreadsheets/d/1fiIOkwfttAIv5P0ca6IcVdAk5IAG-WrThyriQiXPRIQ/export?format=csv&gid=1707814890"
+
 df_unclean = pd.read_csv(url)
 df_unclean = df_unclean.iloc[:, 1:]
 questions = ["How fast do you prefer to move through material?",
@@ -237,7 +236,14 @@ clusters of appropriate size (ideally 3-5 students).
 """
 
 df['clusters'] = clusters
-df.groupby('clusters').size()
+#df.groupby('clusters').size()
+
+plt.figure(figsize=(10,6))
+sns.countplot(x='clusters', data=df)
+plt.title('Number of Students in Each Cluster')
+plt.xlabel('Cluster')
+plt.ylabel('Number of Students')
+plt.show()
 ```
 
 # Group Recommendations and Student Assignment
@@ -259,7 +265,7 @@ df_groups.groupby('group').agg(list)
 # Evaluation Form (from Presenting Team)
 :::: {.columns}
 ::: {.column width="40%"}
-Feedback from the evaluation form will be anonymous, however the results will help us all improve future iterations of our model generalized to all students. ** Ask Rosanna if she wants to share the results to them later on **
+Feedback from the evaluation form will be anonymous, however the results will help us all improve future iterations of our model generalized to all students. 
 :::
 ::: {.column width="60%"}
 ```{python}

@@ -206,7 +206,7 @@ dist
   clusters of appropriate size (3-5 students ideally).
 """
 link_complete = linkage(dist, 'complete')
-clusters = cut_tree(link_complete, n_clusters=12).flatten()
+clusters = cut_tree(link_complete, n_clusters=15).flatten()
 clusters
 ```
 # Our Results Visualized as a Dendrogram 
